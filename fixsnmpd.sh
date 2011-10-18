@@ -37,7 +37,7 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 if [ "$input" == 0 ] ; then
-	# We're just going to grap some input from the user, if the user wants to.
+	# We're just going to grab some input from the user, if the user wants to.
 	echo "What community should snmpd answer to?"
 	read community
 	echo "Where is the system located?"
