@@ -1,0 +1,25 @@
+SNMPD-Installer - v1.4 by devvis
+
+
+I created this script when installing a new network management-tool
+that used snmpd. Since I had like 20 servers to do all the configuration
+on I thought that creating a script was the way to go.
+
+Before putting it up for the public I made some enhancements, so you
+can have interactive input or just an automated installation.
+
+To get started, open up fixsnmpd.sh and edit the config-section,
+and then chmod it so you can execute it (+x), and then just do like
+
+./fixsnmpd.sh
+
+and you should be all set.
+
+I will probably add more configuration options and stuff like that
+when the time is right.
+
+One important thing is that this script contains the distro-script
+provided by Observium, which is useful if you plan on using
+Observium for network monitoring (then the scripts gives you a bit
+more os-related info than snmpd does). Enable the installation of
+the script by setting $observium to 1 in the script.
