@@ -7,7 +7,7 @@
 # The script also contains the distro.sh-file used by the Observium network
 # monitor tool, which autoinstalls itself if you set $observium to 1.
 
-# v1.4 - by devvis
+# v1.5 - by devvis / Gustav Eklundh
 
 
 #####################
@@ -20,7 +20,7 @@ snmpdopts='-Lsd -Lf /dev/null -u snmp -I -p /var/run/snmpd.pid -c /etc/snmp/snmp
 ## Do you (plan to) use observium, if so, set this to 1
 observium=0
 
-## Should we use input or variables defined below?
+## Should we use input or variables defined below? (1 = input, 0 use values defined below)
 input=0
 community='public'
 syslocation='"Some city, Some country"'
@@ -36,7 +36,7 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
-if [ "$input" == 0 ] ; then
+if [ "$input" == 1 ] ; then
 	# We're just going to grab some input from the user, if the user wants to.
 	echo "What community should snmpd answer to?"
 	read community
@@ -58,7 +58,7 @@ fi
 echo "rocommunity     $community" > /etc/snmp/snmpd.conf
 echo "syslocation     $syslocation" >> /etc/snmp/snmpd.conf
 echo "syscontact      $syscontact" >> /etc/snmp/snmpd.conf
-echo "SNMPDOPTS='-Lsd -Lf /dev/null -u snmp -I -p /var/run/snmpd.pid -c /etc/snmp/snmpd.conf'" >> /etc/snmp/snmpd.conf
+echo "SNMPDOPTS=$snmpdopts" >> /etc/snmp/snmpd.conf
 
 if [ "$observium" == 1 ] ; then
 	echo "extend .1.3.6.1.4.1.2021.7890.1 distro /usr/bin/distro" >> /etc/snmp/snmpd.conf
